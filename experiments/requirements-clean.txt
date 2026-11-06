@@ -1,0 +1,18 @@
+# Minimal pinned environment for the encoding-false-security experiments (draft, 2026-10-20).
+# Replaces the full-environment dump in requirements-gate1.txt. Versions are the ones the
+# experiments ran under in the `pytorch` conda env (pip-only install, no conda/pip mixing).
+# Build (Windows, CUDA 12.9 driver):
+#   conda create -n puf-clean python=3.12.13 -y
+#   conda run -n puf-clean python -m pip install -r experiments/requirements-clean.txt \
+#       --extra-index-url https://download.pytorch.org/whl/cu129
+#   conda run -n puf-clean python -m pip install pypuf==2.2.0 --no-deps
+# Validation (to run after building): headline cells T1, E7b, ROC-SPUF, E8 must reproduce, and
+# sklearn's default lbfgs solver must run (it crashes natively in the mixed `pytorch` env).
+numpy==2.4.3
+scipy==1.18.0
+scikit-learn==1.6.1
+pandas==2.2.3
+matplotlib==3.10.8
+xgboost==3.2.0
+memory-profiler==0.61.0  # pypuf 2.2.0 dependency
+torch==2.8.0+cu129
